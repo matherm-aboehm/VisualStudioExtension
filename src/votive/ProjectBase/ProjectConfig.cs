@@ -901,7 +901,10 @@ namespace Microsoft.VisualStudio.Package
 
 			// See if this is an interface we support
 			if (iidCfg == typeof(IVsDebuggableProjectCfg).GUID)
-				ppCfg = Marshal.GetComInterfaceForObject(this, typeof(IVsDebuggableProjectCfg));
+			{
+				if (this is DebuggableProjectConfig)
+					ppCfg = Marshal.GetComInterfaceForObject(this, typeof(IVsDebuggableProjectCfg));
+			}
 			else if (iidCfg == typeof(IVsBuildableProjectCfg).GUID)
 			{
 				IVsBuildableProjectCfg buildableConfig;
